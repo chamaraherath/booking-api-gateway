@@ -1,0 +1,21 @@
+version: '3.0'
+services:
+  booking-api-gateway:
+    container_name: booking-gateway-dev
+    image: booking-gateway-dev
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./.env:/usr/src/app/.env
+      - ./.example:/usr/src/app/.example
+      - ./package.json:/usr/src/app/package.json
+    networks:
+      - ms_net
+    ports:
+      - 6000:3000
+    environment:
+      - NODE_ENV=development
+networks:
+  ms_net:
+    driver: bridge
+    name: ox-network
+    external: true
